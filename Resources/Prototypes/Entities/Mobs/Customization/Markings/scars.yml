@@ -2,8 +2,12 @@
   id: ScarEyeRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Felinid, Harpy, Oni] # Delta V - Felinid, Oni, Harpy
-  followSkinColor: true
+  speciesRestriction: [Human, Dwarf, Felinid, Oni] # Delta V - Felinid, Oni
+  coloring:
+    default:
+      type:
+        !type:TattooColoring
+      fallbackColor: "#FFFFFF"
   sprites:
   - sprite: Mobs/Customization/scars.rsi
     state: scar_eye_right
@@ -12,8 +16,12 @@
   id: ScarEyeLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Felinid, Harpy, Oni] # Delta V - Felinid, Oni, Harpy
-  followSkinColor: true
+  speciesRestriction: [Human, Dwarf, Felinid, Oni] # Delta V - Felinid, Oni
+  coloring:
+    default:
+      type:
+        !type:TattooColoring
+      fallbackColor: "#FFFFFF"
   sprites:
   - sprite: Mobs/Customization/scars.rsi
     state: scar_eye_left
@@ -22,7 +30,7 @@
   id: ScarTopSurgeryShort
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
@@ -33,19 +41,9 @@
   id: ScarTopSurgeryLong
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf]
+  speciesRestriction: [Human]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
     state: scar_top_surgery_long
-
-- type: marking
-  id: ScarChest
-  bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf]
-  followSkinColor: true
-  sprites:
-  - sprite: Mobs/Customization/scars.rsi
-    state: scar_chest

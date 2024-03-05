@@ -4,14 +4,14 @@
   root: torso
   slots:
     head:
-      part: HeadHarpy
+      part: HeadHuman
       connections:
       - torso
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
     torso:
-      part: TorsoHarpy
+      part: TorsoHuman
       connections:
       - left arm
       - right arm
@@ -20,31 +20,31 @@
       organs:
         heart: OrganHumanHeart
         lungs: OrganHarpyLungs
-        stomach: OrganAnimalStomach
-        liver:  OrganAnimalLiver
-        kidneys: OrganAnimalKidneys
+        stomach: OrganHumanStomach
+        liver:  OrganHumanLiver
+        kidneys: OrganHumanKidneys
     right arm:
-      part: RightArmHarpy
+      part: RightArmHuman
       connections:
       - right hand
     left arm:
-      part: LeftArmHarpy
+      part: LeftArmHuman
       connections:
       - left hand
     right hand:
-      part: RightHandHarpy
+      part: RightHandHuman
     left hand:
-      part: LeftHandHarpy
+      part: LeftHandHuman
     right leg:
-      part: RightLegHarpy
+      part: RightLegHuman
       connections:
       - right foot
     left leg:
-      part: LeftLegHarpy
+      part: LeftLegHuman
       connections:
       - left foot
     right foot:
-      part: RightFootHarpy
+      part: RightFootHuman
     left foot:
-      part: LeftFootHarpy
+      part: LeftFootHuman
 

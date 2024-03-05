@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
@@ -168,7 +169,7 @@ namespace Content.Client.Changelog
         }
 
         [DataDefinition]
-        public sealed partial class ChangelogEntry
+        public sealed partial class ChangelogEntry : ISerializationHooks
         {
             [DataField("id")]
             public int Id { get; private set; }
@@ -176,11 +177,17 @@ namespace Content.Client.Changelog
             [DataField("author")]
             public string Author { get; private set; } = "";
 
-            [DataField]
+            [DataField("time")] private string _time = default!;
+
             public DateTime Time { get; private set; }
 
             [DataField("changes")]
             public List<ChangelogChange> Changes { get; private set; } = default!;
+
+            void ISerializationHooks.AfterDeserialization()
+            {
+                Time = DateTime.Parse(_time, null, DateTimeStyles.RoundtripKind);
+            }
         }
 
         [DataDefinition]

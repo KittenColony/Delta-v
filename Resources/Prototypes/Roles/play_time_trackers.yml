@@ -143,9 +143,6 @@
   id: JobTechnicalAssistant
 
 - type: playTimeTracker
-  id: JobVisitor
-
-- type: playTimeTracker
   id: JobWarden
 
 - type: playTimeTracker

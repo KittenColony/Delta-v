@@ -23,7 +23,6 @@ using Robust.Shared.Physics.Controllers;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.StepTrigger.Components; // Delta V-NoShoesSilentFootstepsComponent
 
 namespace Content.Shared.Movement.Systems
 {
@@ -47,7 +46,6 @@ namespace Content.Shared.Movement.Systems
         [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
         [Dependency] private   readonly SharedTransformSystem _transform = default!;
         [Dependency] private   readonly TagSystem _tags = default!;
-        [Dependency] private   readonly IEntityManager _entities = default!; // Delta V-NoShoesSilentFootstepsComponent
 
         protected EntityQuery<InputMoverComponent> MoverQuery;
         protected EntityQuery<MobMoverComponent> MobMoverQuery;
@@ -94,15 +92,20 @@ namespace Content.Shared.Movement.Systems
 
             InitializeInput();
             InitializeRelay();
-            Subs.CVar(_configManager, CCVars.RelativeMovement, value => _relativeMovement = value, true);
-            Subs.CVar(_configManager, CCVars.StopSpeed, value => _stopSpeed = value, true);
+            _configManager.OnValueChanged(CCVars.RelativeMovement, SetRelativeMovement, true);
+            _configManager.OnValueChanged(CCVars.StopSpeed, SetStopSpeed, true);
             UpdatesBefore.Add(typeof(TileFrictionController));
         }
+
+        private void SetRelativeMovement(bool value) => _relativeMovement = value;
+        private void SetStopSpeed(float value) => _stopSpeed = value;
 
         public override void Shutdown()
         {
             base.Shutdown();
             ShutdownInput();
+            _configManager.UnsubValueChanged(CCVars.RelativeMovement, SetRelativeMovement);
+            _configManager.UnsubValueChanged(CCVars.StopSpeed, SetStopSpeed);
         }
 
         public override void UpdateAfterSolve(bool prediction, float frameTime)
@@ -440,14 +443,6 @@ namespace Content.Shared.Movement.Systems
                 sound = moverModifier.FootstepSoundCollection;
                 return true;
             }
-            
-            // If got the component in yml and no shoes = no sound. Delta V
-            if (_entities.TryGetComponent(uid, out NoShoesSilentFootstepsComponent? _) &
-                !_inventory.TryGetSlotEntity(uid, "shoes", out var _))
-            {
-                return false;
-            }
-            // Delta V NoShoesSilentFootsteps till here.
 
             if (_inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
                 TryComp<FootstepModifierComponent>(shoes, out var modifier))

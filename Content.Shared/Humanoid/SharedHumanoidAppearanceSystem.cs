@@ -329,8 +329,6 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         humanoid.Age = profile.Age;
 
-        humanoid.LastProfileLoaded = profile; // DeltaV - let paradox anomaly be cloned
-
         Dirty(humanoid);
     }
 

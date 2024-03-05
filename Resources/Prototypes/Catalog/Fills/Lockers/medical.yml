@@ -201,6 +201,5 @@
       - id: ClothingHeadsetMedical
       - id: ClothingMaskSterile
       - id: ClothingShoesBootsWinterParamedic #Delta V: Add departmental winter boots
-      - id: HandheldGPSBasic
       - id: MedkitFilled
         prob: 0.3

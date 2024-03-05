@@ -23,6 +23,7 @@
   name: NPC Snake Spawner
   id: SnakeSpawnerMundane
   parent: MarkerBase
+  suffix: No Ghost Takeover
   components:
     - type: Sprite
       layers:
@@ -32,7 +33,7 @@
     - type: RandomSpawner
       prototypes:
         - MobPurpleSnake
-        - MobCobraSpace
+        - MobCobraSpaceNPC
       rarePrototypes:
         - MobSmallPurpleSnake
       rareChance: 0.2
@@ -76,6 +77,20 @@
       rarePrototypes:
         - MobSmallPurpleSnakeGhost
       rareChance: 0.20
+
+- type: entity
+  name: Space Tick Spawner
+  id: SpaceTickSpawnerNPC
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Mobs/Aliens/Xenos/spacetick.rsi
+          state: icon
+    - type: ConditionalSpawner
+      prototypes:
+        - MobTick
 
 - type: entity
   name: Xeno Spawner
@@ -151,6 +166,7 @@
   name: Space Creature Spawner
   id: SpaceCreatureAISpawner
   parent: MarkerBase
+  suffix: No Ghost Takeover
   components:
     - type: Sprite
       layers:
@@ -160,9 +176,9 @@
         - state: ai
     - type: RandomSpawner
       prototypes:
-        - MobBearSpace
-        - MobKangarooSpace
-        - MobSpiderSpace
+        - MobBearSpaceNPC
+        - MobKangarooSpaceNPC
+        - MobSpiderSpaceNPC
 
 - type: entity
   name: Arena Spawner

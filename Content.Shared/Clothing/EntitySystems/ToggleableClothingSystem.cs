@@ -170,7 +170,12 @@ public sealed class ToggleableClothingSystem : EntitySystem
         // "outside" of the container or not. This means that if a hardsuit takes too much damage, the helmet will also
         // automatically be deleted.
 
-        _actionsSystem.RemoveAction(component.ActionEntity);
+        // remove action.
+        if (_actionsSystem.TryGetActionData(component.ActionEntity, out var action) &&
+            action.AttachedEntity != null)
+        {
+            _actionsSystem.RemoveAction(action.AttachedEntity.Value, component.ActionEntity);
+        }
 
         if (component.ClothingUid != null && !_netMan.IsClient)
             QueueDel(component.ClothingUid.Value);
@@ -194,7 +199,13 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (toggleComp.LifeStage > ComponentLifeStage.Running)
             return;
 
-        _actionsSystem.RemoveAction(toggleComp.ActionEntity);
+        // remove action.
+        if (_actionsSystem.TryGetActionData(toggleComp.ActionEntity, out var action) &&
+            action.AttachedEntity != null)
+        {
+            _actionsSystem.RemoveAction(action.AttachedEntity.Value, toggleComp.ActionEntity);
+        }
+
         RemComp(component.AttachedUid, toggleComp);
     }
 
